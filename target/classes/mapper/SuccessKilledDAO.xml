@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lrichiewl.seckill.dao.SuccessKilledDao">
+    <insert id="insertSuccessKilled">
+        <!-- 存在主键冲突，会报错；ignore关键字来避免报错，冲突时返回0即可 -->
+        INSERT ignore INTO success_seckill(seckill_id,user_phone_num, state)
+        VALUES (#{seckillId},#{userPhoneNum},0)
+    </insert>
+
+    <select id="queryByIdWithSeckill" resultType="SuccessSeckilled">
+        <!-- 根据ID查询SuccessSeckilled下单记录，并携带产品对象实体 -->
+        <!-- 我们希望直接让MyBatis的操作同时映射到SuccessSeckilled.java(已经用resultType属性来完成了)和Seckill.java(使用别名来实现) -->
+        SELECT
+            ssk.seckill_id,
+            ssk.user_phone_num,
+            ssk.create_time,
+            ssk.state,
+            s.seckill_id AS "seckill.seckill_id",
+            s.name AS "seckill.name",
+            s.number AS "seckill.number",
+            s.start_time AS "seckill.start_time",
+            s.end_time AS "seckill.end_time",
+            s.create_time AS "seckill.create_time"
+        FROM
+            success_seckill ssk
+        INNER JOIN seckill s ON ssk.seckill_id = s.seckill_id
+        WHERE ssk.seckill_id=#{seckillId} and ssk.user_phone_num=#{userPhoneNum}
+
+    </select>
+</mapper>
