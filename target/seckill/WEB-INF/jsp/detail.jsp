@@ -39,7 +39,7 @@
                 <div class="row">
                     <div class="col-xs-8 col-xs-offset-2">
                         <input type="text" name="killPhone" id="killPhoneKey"
-                               placeholder="填写手机号^o^" class="form-control">
+                               placeholder="请填写手机号" class="form-control">
                     </div>
                 </div>
             </div>
@@ -68,7 +68,7 @@
 <%--jQuery countDown倒计时插件--%>
 <script src="http://cdn.bootcss.com/jquery.countdown/2.1.0/jquery.countdown.min.js"></script>
 
-<script src="/resource/script/seckill.js" type="text/javascript"></script>
+<script src="/seckill/resource/script/seckill.js" type="text/javascript"></script>
 
 <script type="text/javascript">
     $(function () {
